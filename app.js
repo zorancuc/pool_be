@@ -18,7 +18,9 @@ const User = require('./models/User');
 const jwt = require('jsonwebtoken');
 
 const {
-  JWT_PASSPHRASE: jwtSecret
+  JWT_PASSPHRASE: jwtSecret,
+  CALLBACK_URL: callback_url,
+  CLIENT_ID: client_id,
 } = process.env;
 
 
@@ -30,8 +32,8 @@ var app = express();
 passport.use(
   "kakao-login",
   new KakaoStrategy({
-      clientID: "69b9e7e81a0d8274fabba4161d383171",
-      callbackURL: "http://192.168.0.3:3001/api/auth/loginKakao/callback",
+      clientID: client_id,
+      callbackURL: callback_url,
     },
     async (accessToken, refreshToken, profile, done) => {
       console.log(profile);
